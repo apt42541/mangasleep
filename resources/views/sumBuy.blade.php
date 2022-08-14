@@ -16,7 +16,24 @@
                             <div class=" p-2">
                                 <div class="row">
                                     @if(isset($buy))
-                                    <p class="alert alert-info w-100"> ยอดคำสั่งซื้อ {{ $buy }} ครั้ง</p>
+                                    <table id="example" class="display" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Manga_Name</th>
+                                                <th>Date</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($buy as $b)
+                                            <tr>
+                                                <td>{{ $b->manga_name }}</td>
+                                                <td>{{ $b->created_at }}</td>
+
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                     @endif
                                     <div class="col-sm-12 table-responsive">
 
@@ -26,9 +43,9 @@
                                             <h3>ดึงสรุปยอดคนซื้อ</h3>
                                             <select name="manga_id" id="">
                                                 @foreach($manga as $m)
-                                                        <option value="{{$m->manga_id}}">{{$m->manga_name}}</option>
+                                                <option value="{{$m->manga_id}}">{{$m->manga_name}}</option>
                                                 @endforeach
-                                            
+
                                             </select>
                                             <input type="date" name="start" class="form-control my-2">
                                             <input type="date" name="end" class="form-control my-2">
@@ -53,9 +70,24 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
         <script>
             $(document).ready(function() {
-                $('#example').dataTable();
+                $('#example').dataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: [
+                            'copy',
+                            'excel',
+                            'csv',
+                            'pdf',
+                            'print'
+                        ]
+                    }]
+                });
             });
         </script>
 </x-layout>
