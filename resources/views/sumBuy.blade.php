@@ -16,25 +16,26 @@
                             <div class=" p-2">
                                 <div class="row">
                                     @if(isset($buy))
-                                    <table id="example" class="display nowrap" style="width:100%">
+                                    <table id="example" class="table bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Date</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011-04-25</td>
-                                                <td>$320,800</td>
+                                                @foreach($buy as $b)
+                                                <td>
+                                                    {{ $b->manga_name}}
+                                                <td>{{ $b->created_at}}
+
+                                                </td>
+                                            </tr>
+
+
+                                            @endforeach
                                             </tr>
                                         </tbody>
                                     </table>
@@ -72,23 +73,17 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" />
-
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 
         <script>
             $(document).ready(function() {
                 $('#example').DataTable({
-                    "dom": 'Bfrtip',
-                    "buttons": ['excel', 'pdf'],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5', 'excelHtml5', 'pdfHtml5', 'csvHtml5'
+                    ]
                 });
             });
         </script>
